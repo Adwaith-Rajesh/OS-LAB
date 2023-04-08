@@ -112,7 +112,7 @@ int perform_sjf_np(Process ps[], EProcess e_ps[], int n) {
             // stop idling, if we were doing so
             if (idle == 1) {
                 idle = 0;
-                e_ps[curr_eps++].ct = 1;
+                e_ps[curr_eps++].ct = clk;
             }
             strncpy(e_ps[curr_eps].name, ps[idx].name, 5);
             e_ps[curr_eps].st = clk;
