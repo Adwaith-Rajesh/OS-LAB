@@ -83,40 +83,40 @@ void sort_processes(Process processes[], int n) {
 int perform_fcfs(Process ps[], EProcess e_ps[], int n) {
     // return the total number of individual execution performed
     int idle = 0;
-    int num = 0, i = 0, j = 0;
-    for (num = 0, i = 0, j = 0; j < n;) {
-        if (ps[j].at <= i && ps[j].status == 0) {
+    int curr_eps = 0, clk = 0, curr_ps = 0;
+    for (curr_eps = 0, clk = 0, curr_ps = 0; curr_ps < n;) {
+        if (ps[curr_ps].at <= clk && ps[curr_ps].status == 0) {
             // check if the processor was idling before the current process
             // starts execution
             if (idle == 1) {
-                e_ps[num++].ct = i;
+                e_ps[curr_eps++].ct = clk;
                 idle = 0;
             }
-            strncpy(e_ps[num].name, ps[j].name, 5);
-            e_ps[num].st = i;             // start time = i
-            e_ps[num].ct = i + ps[j].bt;  // completion time = start time + burst time (fcfs)
+            strncpy(e_ps[curr_eps].name, ps[curr_ps].name, 5);
+            e_ps[curr_eps].st = clk;                   // start time = i
+            e_ps[curr_eps].ct = clk + ps[curr_ps].bt;  // completion time = start time + burst time (fcfs)
 
-            ps[j].wt = i - ps[j].at;             // wait time = start time - arrival time
-            ps[j].tt = e_ps[num].ct - ps[j].at;  // turn around time = completion time - arrival time
-            ps[j].ct = e_ps[num].ct;
+            ps[curr_ps].wt = clk - ps[curr_ps].at;                // wait time = start time - arrival time
+            ps[curr_ps].tt = e_ps[curr_eps].ct - ps[curr_ps].at;  // turn around time = completion time - arrival time
+            ps[curr_ps].ct = e_ps[curr_eps].ct;
 
-            i = e_ps[num++].ct;
-            ps[j++].status = 1;  // process has completely executed
+            clk = e_ps[curr_eps++].ct;
+            ps[curr_ps++].status = 1;  // process has completely executed
             continue;
         }
 
         // no process to execute, check for idle
         // if not starts idling
         if (idle == 0) {
-            strncpy(e_ps[num].name, "Idle", 5);
-            e_ps[num].st = i;
-            i++;
+            strncpy(e_ps[curr_eps].name, "Idle", 5);
+            e_ps[curr_eps].st = clk;
+            clk++;
             idle = 1;
             continue;
         }
-        i++;
+        clk++;
     }
-    return num;
+    return curr_eps;
 }
 
 int main() {
