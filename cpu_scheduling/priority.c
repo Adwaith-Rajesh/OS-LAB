@@ -82,9 +82,9 @@ int get_next_process_idx(Process ps[], int clk, int n) {
     return (found == 1) ? min : -1;
 }
 
-int perform_sjf(Process ps[], int n) {
-    int idle = 0, clk, curr_eps, curr_ps;
-    for (clk = 0, curr_ps = 0, curr_eps = 0; curr_ps < n;) {
+void perform_priority(Process ps[], int n) {
+    int idle = 0, clk, curr_ps;
+    for (clk = 0, curr_ps = 0; curr_ps < n;) {
         int idx = get_next_process_idx(ps, clk, n);
 
         // check for idling
@@ -113,7 +113,6 @@ int perform_sjf(Process ps[], int n) {
         }
         clk++;
     }
-    return curr_eps;
 }
 
 int main() {
@@ -123,7 +122,7 @@ int main() {
     scanf("%d", &n);
 
     read_n_process(processes, n);
-    int num = perform_sjf(processes, n);
+    perform_priority(processes, n);
 
     print_n_processes(processes, n);
     return 0;
