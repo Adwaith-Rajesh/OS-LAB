@@ -79,7 +79,7 @@ int get_next_process_idx(Process ps[], int clk, int n) {
     return (found == 1) ? min : -1;
 }
 
-int perform_sjf_np(Process ps[], int n) {
+int perform_sjf(Process ps[], int n) {
     int idle = 0, clk, curr_eps, curr_ps;
     for (clk = 0, curr_ps = 0, curr_eps = 0; curr_ps < n;) {
         int idx = get_next_process_idx(ps, clk, n);
@@ -98,7 +98,7 @@ int perform_sjf_np(Process ps[], int n) {
                 idle = 0;
             }
 
-            ps[idx].status = 1;  // (SJF-NP, executes a process completely)
+            ps[idx].status = 1;  // (SJF, executes a process completely)
             ps[idx].ct = clk + ps[idx].bt;
 
             ps[idx].tt = ps[idx].ct - ps[idx].at;
@@ -120,7 +120,7 @@ int main() {
     scanf("%d", &n);
 
     read_n_process(processes, n);
-    int num = perform_sjf_np(processes, n);
+    int num = perform_sjf(processes, n);
 
     print_n_processes(processes, n);
     return 0;
@@ -134,45 +134,40 @@ Enter the details of the processes
 
 Enter the details of processes 1
 Name: p1
-Arrival Time: 1
-Burst Time: 7
+Arrival Time: 0
+Burst Time: 8
 
 Enter the details of processes 2
 Name: p2
-Arrival Time: 3
-Burst Time: 3
+Arrival Time: 2
+Burst Time: 9
 
 Enter the details of processes 3
 Name: p3
-Arrival Time: 6
-Burst Time: 2
+Arrival Time: 4
+Burst Time: 1
 
 Enter the details of processes 4
 Name: p4
-Arrival Time: 7
-Burst Time: 10
+Arrival Time: 6
+Burst Time: 6
 
 Enter the details of processes 5
 Name: p5
-Arrival Time: 9
-Burst Time: 8
+Arrival Time: 8
+Burst Time: 3
 
 | ----- Table ----- |
 
 Name            Arrival Time    Burst Time      Completion Time Waiting Time    Turn around Time
-p1              1               7               8               0               7
-p2              3               3               13              7               10
-p3              6               2               10              2               4
-p4              7               10              31              14              24
-p5              9               8               21              4               12
+p1              0               8               8               0               8
+p2              2               9               27              16              25
+p3              4               1               9               4               5
+p4              6               6               18              6               12
+p5              8               3               12              1               4
 ------------------------------------------------------------------------------------------------
-                                                     Average    5.40           11.40
+                                                     Average    5.40           10.80
 
-| ----- Gantt Chart ----- |
 
-+-----+-----+-----+-----+-----+-----+
-|Idle |p1   |p3   |p2   |p5   |p4   |
-+-----+-----+-----+-----+-----+-----+
-0     1     8     10    13    21    31
 
 */
