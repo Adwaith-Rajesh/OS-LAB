@@ -1,6 +1,6 @@
-# vml21ad004
 
 # a.
+from scipy.stats import poisson
 from scipy.stats import binom
 
 
@@ -18,11 +18,9 @@ print(y)
 # 0.822021484375
 
 # b.
-from scipy.stats import poisson
 
 
 print(poisson.pmf(k=6, mu=3.4))
 
 # output
 # 0.07160440945982202
-

@@ -1,5 +1,3 @@
-# vml21ad004
-
 from math import sqrt
 
 
@@ -21,4 +19,3 @@ else:
 # output
 # t-static: 2.6666666666666665
 # H0 accepted
-

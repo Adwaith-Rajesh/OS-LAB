@@ -1,5 +1,3 @@
-# vml21ad004
-
 import math
 
 # Given data
