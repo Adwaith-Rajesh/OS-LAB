@@ -1,5 +1,5 @@
+// vml21add004
 // non pre-emptive SJF
-// explanation for calculating the wait times and other properties are in `fcfs.c`
 
 #include <stdio.h>
 #include <stdlib.h>
